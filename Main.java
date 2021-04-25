@@ -41,7 +41,7 @@ import java.util.Random; // Generates objects of Random type.
   
 
 final public class Main implements MouseInputListener{
-    int money = 1200;
+    int money = 5000;
     public static int happiness = 10;
     public static int Pollution = 10;
     public static int mx, my;
@@ -50,25 +50,37 @@ final public class Main implements MouseInputListener{
     public static int counter = 0;
     public static int smallHouse = 0;
     public static int ifRoad = 0;
-  
-   
+    
+    public static int MedHouse;
+    public static int HighHouse;
+    public static int LowCommerce;
+    public static int MedCom;
+    public static int HighCom;
+    public static int Factory;
+    public static int School;
+    public static int NuclearPlant;
+    public static int Windmill;
+    public static int SolarPanels;
+    public static int WaterTower;
+    public static int FireStation;
+    public static int PoliceStation;
 
     public static int tf = 1;
-
+    
     JFrame frame;
     DrawPanel drawPanel;
     JButton low;
     JButton lowRes;
     JButton lowComm;
-
+    
     JButton mid;
     JButton midRes;
     JButton midComm;
-
+    
     JButton high;
     JButton highRes;
     JButton highComm;
-
+    
     JButton services;
     JButton cityServices;
     JButton police;
@@ -79,9 +91,11 @@ final public class Main implements MouseInputListener{
     JButton nuclearPowerButton;
     JButton factory;
     JButton school;
-
+    JButton land;
+    JButton tree;
     JButton close;
-
+    
+    
     boolean lowBool = false;
     boolean lowPurchaseBool = false;
     boolean midBool = false;
@@ -117,7 +131,6 @@ final public class Main implements MouseInputListener{
     }
 
     private void go() {
-      
         Color lighterBlack = new Color(64, 64, 64);
         frame = new JFrame("Test");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -157,6 +170,7 @@ final public class Main implements MouseInputListener{
                 System.out.println("Low commercial purchased");
                 lowBool = false;
                 lowPurchaseBool = true;
+                LowCommerce +=1;
                 midBool = false;
                 resBool = false;
                 commBool = true;
@@ -178,7 +192,6 @@ final public class Main implements MouseInputListener{
                     opacity = 255;
                     opacityImg = 1.0f;
                     lowBool = true;
-                    
                     midBool = false;
                     highBool = false;
                     servicesBool = false;
@@ -188,11 +201,15 @@ final public class Main implements MouseInputListener{
                     frame.remove(highComm);
                     frame.remove(midRes);
                     frame.remove(midComm);
+                    frame.remove(cityServices);
+                    frame.remove(energy);
+                    frame.remove(factory);
+                    frame.remove(school);
                 }
                 else {
                     opacity = 0;
                     opacityImg = 0.0f;
-                   lowBool = false;
+                    lowBool = false;
                     midBool = false;
                     highBool = false;
                     servicesBool = false;
@@ -262,11 +279,15 @@ final public class Main implements MouseInputListener{
                     frame.remove(highComm);
                     frame.remove(lowRes);
                     frame.remove(lowComm);
+                    frame.remove(cityServices);
+                    frame.remove(energy);
+                    frame.remove(factory);
+                    frame.remove(school);
                 }
                 else {
                     opacity = 0;
                     opacityImg = 0.0f;
-                   lowBool = false;
+                    lowBool = false;
                     midBool = false;
                     highBool = false;
                     servicesBool = false;
@@ -305,8 +326,10 @@ final public class Main implements MouseInputListener{
                 commBool = true;
                 count = 0;
                 tf = 0;
-                frame.remove(highRes);
-                frame.remove(highComm);
+                frame.remove(cityServices);
+                frame.remove(energy);
+                frame.remove(factory);
+                frame.remove(school);
             } 
         } );
         //Adding button for high rise
@@ -324,12 +347,17 @@ final public class Main implements MouseInputListener{
                     midBool = false;
                     highBool = true;
                     servicesBool = false;
+                    cityServiceBool = false;
                     frame.add(highRes);
                     frame.add(highComm);
                     frame.remove(midRes);
                     frame.remove(midComm);
                     frame.remove(lowRes);
                     frame.remove(lowComm);
+                    frame.remove(cityServices);
+                    frame.remove(energy);
+                    frame.remove(factory);
+                    frame.remove(school);
                 }
                 else {
                     opacity = 0;
@@ -338,22 +366,122 @@ final public class Main implements MouseInputListener{
                     midBool = false;
                     highBool = false;
                     servicesBool = false;
+                    cityServiceBool = false;
                     frame.remove(highRes);
                     frame.remove(highComm);
                 }
             }
         } );
         frame.add(high);
+        //Landscape
+         
+         land = new JButton("");
+         land.setBounds(450, 720, 45, 45);
+         land.setBackground(lighterBlack);
+         land.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 System.out.println("Button pressed");
+                 count++;
+                 if(count%2 != 0) {
+                     opacity = 255;
+                     opacityImg = 1.0f;
+                     lowBool = false;
+                     midBool = false;
+                     highBool = true;
+                     servicesBool = false;
+                     cityServiceBool = false;
+                     landscapeBool = true;
+                     frame.add(highRes);
+                     frame.add(highComm);
+                     frame.remove(midRes);
+                     frame.remove(midComm);
+                     frame.remove(lowRes);
+                     frame.remove(lowComm);
+                     frame.remove(cityServices);
+                     frame.remove(energy);
+                     frame.remove(factory);
+                     frame.remove(school);
+                 }
+                 else {
+                     opacity = 0;
+                     opacityImg = 0.0f;
+                     lowBool = false;
+                     midBool = false;
+                     highBool = false;
+                     landscapeBool = false;
+                     servicesBool = false;
+                     cityServiceBool = false;
+                     frame.remove(highRes);
+                     frame.remove(highComm);
+                 }
+             }
+         } );
+         frame.add(land);
         
         //Adding the buttons for the menu
+        police = new JButton("");
+        police.setBounds(30, 620, 100, 100);
+        police.setBackground(lighterBlack);
+        police.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Police station purchased");
+                servicesBool = false;
+                cityServiceBool = false;
+                policeBool = true;
+                fireBool = false;
+                energyBool = false;
+                windmill = false;
+                solarPanel = false;
+                nuclearPower = false;
+                schoolBool = false;
+                factoryBool = false;
+                servicesPurchaseBool = true;
+                resBool = false;
+                commBool = false;
+                count = 0;
+                tf = 0;
+                frame.remove(cityServices);
+                frame.remove(energy);
+                frame.remove(factory);
+                frame.remove(school);
+                frame.remove(police);
+                frame.remove(fire);
+            }
+        } );
+        fire = new JButton("");
+        fire.setBounds(182,620,100,100);
+        fire.setBackground(lighterBlack);
+        fire.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                servicesBool = false;
+                cityServiceBool = false;
+                policeBool = false;
+                fireBool = true;
+                energyBool = false;
+                windmill = false;
+                solarPanel = false;
+                nuclearPower = false;
+                schoolBool = false;
+                factoryBool = false;
+                servicesPurchaseBool = true;
+                resBool = false;
+                commBool = false;
+                count = 0;
+                tf = 0;
+                frame.remove(cityServices);
+                frame.remove(energy);
+                frame.remove(factory);
+                frame.remove(school);
+                frame.remove(police);
+                frame.remove(fire);
+            }
+        } );
         cityServices = new JButton("");
         cityServices.setBounds(30, 620, 100, 100);
         cityServices.setBackground(lighterBlack);
         cityServices.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Button pressed");
-                count++;
-                if(count%2 != 0) {
+                System.out.println("Opened city services panel");
                     opacity = 255;
                     opacityImg = 1.0f;
                     lowBool = false;
@@ -367,60 +495,241 @@ final public class Main implements MouseInputListener{
                     frame.remove(midComm);
                     frame.remove(lowRes);
                     frame.remove(lowComm);
-                }
-                else {
-                    opacity = 0;
-                    opacityImg = 0.0f;
-                    lowBool = false;
-                    midBool = false;
-                    highBool = false;
-                    servicesBool = false;
-                    cityServiceBool = false;
-                    frame.remove(highRes);
-                    frame.remove(highComm);
-                }
+                    frame.remove(cityServices);
+                    frame.remove(energy);
+                    frame.remove(factory);
+                    frame.remove(school);
+                    frame.add(police);
+                    frame.add(fire);
+                
+            }
+        } );
+        
+        
+        windmillButton = new JButton("");
+        windmillButton.setBounds(32,620,100,100);
+        windmillButton.setBackground(lighterBlack);
+        windmillButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Windmill purchased");
+                opacity = 0;
+                opacityImg = 0.0f;
+                servicesBool = false;
+                cityServiceBool = false;
+                policeBool = false;
+                fireBool = false;
+                energyBool = false;
+                windmill = false;
+                solarPanel = false;
+                nuclearPower = false;
+                schoolBool = false;
+                factoryBool = false;
+                servicesPurchaseBool = true;
+                resBool = false;
+                commBool = false;
+                windmill = true;
+                tf = 0;
+                frame.remove(cityServices);
+                frame.remove(energy);
+                frame.remove(factory);
+                frame.remove(school);
+                frame.remove(windmillButton);
+                frame.remove(solarPanelButton);
+                frame.remove(nuclearPowerButton);
+            }
+        } );
+        solarPanelButton = new JButton("");
+        solarPanelButton.setBounds(182,620,100,100);
+        solarPanelButton.setBackground(lighterBlack);
+        solarPanelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(money >= 150){
+                System.out.println("Solar panel purchased");
+                SolarPanels+=1;
+                opacity = 0;
+              
+                opacityImg = 0.0f;
+                servicesBool = false;
+                cityServiceBool = false;
+                policeBool = false;
+                money -=175;
+                fireBool = false;
+                energyBool = false;
+                windmill = false;
+                solarPanel = false;
+                nuclearPower = false;
+                schoolBool = false;
+                factoryBool = false;
+                servicesPurchaseBool = true;
+                resBool = false;
+                commBool = false;
+                solarPanel = true;
+                tf = 0;
+                frame.remove(cityServices);
+                frame.remove(energy);
+                frame.remove(factory);
+                frame.remove(school);
+                frame.remove(windmillButton);
+                frame.remove(solarPanelButton);
+                frame.remove(nuclearPowerButton);
+            }
+        }
+        } );
+        nuclearPowerButton = new JButton("");
+        nuclearPowerButton.setBounds(352,620,100,100);
+        nuclearPowerButton.setBackground(lighterBlack);
+        nuclearPowerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Nuclear power plant purchased");
+                opacity = 0;
+                opacityImg = 0.0f;
+                servicesBool = false;
+                cityServiceBool = false;
+                policeBool = false;
+                fireBool = false;
+                energyBool = false;
+                windmill = false;
+                solarPanel = false;
+                nuclearPower = false;
+                schoolBool = false;
+                factoryBool = false;
+                servicesPurchaseBool = true;
+                resBool = false;
+                commBool = false;
+                nuclearPower = true;
+                count = 0;
+                tf = 0;
+                frame.remove(cityServices);
+                frame.remove(energy);
+                frame.remove(factory);
+                frame.remove(school);
+                frame.remove(windmillButton);
+                frame.remove(solarPanelButton);
+                frame.remove(nuclearPowerButton);
             }
         } );
         
         energy = new JButton("");
-        energy.setBounds(182,620,100,100);
+        energy.setBounds(30, 620, 100, 100);
         energy.setBackground(lighterBlack);
         energy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Button pressed");
-                count++;
-                if(count%2 != 0) {
+                System.out.println("Opened energy panel");
                     opacity = 255;
                     opacityImg = 1.0f;
                     lowBool = false;
                     midBool = false;
                     highBool = false;
                     servicesBool = false;
-                    cityServiceBool = false;
-                    energyBool = true;
+                    cityServiceBool = true;
                     frame.remove(highRes);
                     frame.remove(highComm);
                     frame.remove(midRes);
                     frame.remove(midComm);
                     frame.remove(lowRes);
                     frame.remove(lowComm);
-                }
-                else {
-                    opacity = 0;
-                    opacityImg = 0.0f;
+                    frame.remove(cityServices);
+                    frame.remove(energy);
+                    frame.remove(factory);
+                    frame.remove(school);
+                    frame.add(nuclearPowerButton);
+                    frame.add(windmillButton);
+                    frame.add(solarPanelButton);
+            }
+        } );
+        
+        factory = new JButton("");
+        factory.setBounds(332, 620, 100, 100);
+        factory.setBackground(lighterBlack);
+        factory.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(money>=1600){
+                System.out.println("Factory purchased");
+                servicesBool = false;
+                cityServiceBool = false;
+                
+                policeBool = false;
+                money -= 2000;
+                fireBool = false;
+                energyBool = false;
+                windmill = false;
+                solarPanel = false;
+                nuclearPower = false;
+                schoolBool = false;
+                factoryBool = true;
+                Factory+=1;
+                servicesPurchaseBool = true;
+                resBool = false;
+                commBool = false;
+                count = 0;
+                tf = 0;
+                frame.remove(cityServices);
+                frame.remove(energy);
+                frame.remove(factory);
+                frame.remove(school);
+            }
+        }
+        } );
+        energy = new JButton("");
+        energy.setBounds(182,620,100,100);
+        energy.setBackground(lighterBlack);
+        energy.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Opened energy panel");
+                    opacity = 255;
+                    opacityImg = 1.0f;
                     lowBool = false;
                     midBool = false;
                     highBool = false;
                     servicesBool = false;
+                    infographic = 3;
                     cityServiceBool = false;
-                    energyBool = false;
+                    energyBool = true;
+                    factoryBool = false;
+                    schoolBool = false;
                     frame.remove(highRes);
                     frame.remove(highComm);
-                }
+                    frame.remove(midRes);
+                    frame.remove(midComm);
+                    frame.remove(lowRes);
+                    frame.remove(lowComm);
+                    frame.remove(cityServices);
+                    frame.remove(energy);
+                    frame.remove(factory);
+                    frame.remove(school);
+                    frame.add(windmillButton);
+                    frame.add(solarPanelButton);
+                    frame.add(nuclearPowerButton);
             }
         } );
-        energy = new JButton("");
-        energy.setBackground(lighterBlack);
+        
+        school = new JButton("");
+        school.setBounds(482, 620, 100, 100);
+        school.setBackground(lighterBlack);
+        school.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("School purchased");
+                servicesBool = false;
+                cityServiceBool = false;
+                policeBool = false;
+                fireBool = false;
+                energyBool = false;
+                windmill = false;
+                solarPanel = false;
+                nuclearPower = false;
+                schoolBool = true;
+                factoryBool = false;
+                servicesPurchaseBool = true;
+                resBool = false;
+                commBool = true;
+                count = 0;
+                tf = 0;
+                frame.remove(cityServices);
+                frame.remove(energy);
+                frame.remove(factory);
+                frame.remove(school);
+            }
+        } );
         //Adding the services button
         services = new JButton("");
         services.setBounds(412, 720, 45, 45);
@@ -454,14 +763,13 @@ final public class Main implements MouseInputListener{
                     midBool = false;
                     highBool = false;
                     servicesBool = false;
-                    frame.remove(highRes);
-                    frame.remove(highComm);
+                    frame.remove(cityServices);
+                    frame.remove(energy);
+                    frame.remove(factory);
+                    frame.remove(school);
                 }
             }
         } );
-
-        //Money Meter
-        
         frame.add(services);
         
         frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
@@ -493,13 +801,11 @@ final public class Main implements MouseInputListener{
              AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,opacityCurrent);
              AlphaComposite ac2 = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1);
              super.paintComponent(g);
-            
-             //font
-            
-
+             
+             g2d.drawString("$" + money, 50, 50);
+             
              g.setColor(Color.GREEN);
              g.fillRect(0, 0, 875, 720);
-             
              g.setColor(Color.BLACK);
              g.fillRect(0, 720, 875, 80);
              //money
@@ -520,15 +826,11 @@ final public class Main implements MouseInputListener{
             g.fillRect(580, 725, 120, 30);
             g.setColor(Color.GRAY);
             g.fillRect(590, 730, 100, 20);
-            g.setColor(Color.BLACK);
-            g.fillRect(Pollution+520, 730, 100, 20);
+            g.setColor(Color.RED);
+            g.fillRect(590, 730, Pollution, 20);
            
            
            repaint();
-          
-         
-           
-            
              
              //Road
              for(int i = 100; i < 870; i+=125) {
@@ -536,13 +838,11 @@ final public class Main implements MouseInputListener{
                  g.fillRect(i, 0, 25, 720);
                  g.setColor(Color.WHITE);
                  g.drawRect(i, 0, 25, 720);
-                 g.drawRect(i + 12, 0, 2, 720);
                  if(i < 700) {
                     g.setColor(Color.BLACK);
                     g.fillRect(0, i, 875, 25);
                     g.setColor(Color.WHITE);
                     g.drawRect(0, i, 875, 25);
-                    g.fillRect(0, i + 12, 875, 2);
                  }
              }
              g.setColor(Color.BLACK);
@@ -684,10 +984,125 @@ final public class Main implements MouseInputListener{
                      lowPurchaseBool = false;
                  }
              }
+             else if(servicesPurchaseBool) {
+                 xChangeConst = 7;
+                 yChangeConst = 32;
+                 widthConst = 50;
+                 heightConst = 50;
+                 if(policeBool) {
+                     ImageIcon icon = new ImageIcon("police.png");
+                     buildingImg = icon.getImage();
+                     servicesPurchaseBool = false;
+                 }
+                 else if(fireBool) {
+                     ImageIcon icon = new ImageIcon("fire.png");
+                     buildingImg = icon.getImage();
+                     servicesPurchaseBool = false;
+                 }
+                 else if(windmill) {
+                     ImageIcon icon = new ImageIcon("Untitled_Artwork.png");
+                     buildingImg = icon.getImage();
+                     servicesPurchaseBool = false;
+                 }
+                 else if(solarPanel) {
+                     ImageIcon icon = new ImageIcon("solar pannel.png");
+                     buildingImg = icon.getImage();
+                     servicesPurchaseBool = false;
+                 }
+                 else if(nuclearPower) {
+                     ImageIcon icon = new ImageIcon("power.png");
+                     buildingImg = icon.getImage();
+                     servicesPurchaseBool = false;
+                 }
+                 else if(factoryBool) {
+                     ImageIcon icon = new ImageIcon("factory.png");
+                     buildingImg = icon.getImage();
+                     servicesPurchaseBool = false;
+                 }
+                 else if(schoolBool) {
+                     Random rand = new Random();
+                     int upperbound = 2;
+                     int_random = rand.nextInt(upperbound);
+                     ImageIcon icon = new ImageIcon("factory.png");
+                     if(int_random == 0) {
+                         icon = new ImageIcon("school.png");
+                     }
+                     else if(int_random == 1) {
+                         icon = new ImageIcon("school2.png");
+                     }
+                     buildingImg = icon.getImage();
+                     servicesPurchaseBool = false;
+                 }
+             }
+             if(servicesBool) {
+                g.fillRect(0, 620, 875, 100);
+                //City services
+                ImageIcon cityServicesIcon = new ImageIcon("police.png");
+                Image cityServicesImage = cityServicesIcon.getImage();
+                //Energy
+                ImageIcon energyIcon = new ImageIcon("power.png");
+                Image energyImage = energyIcon.getImage();
+                //Factory
+                ImageIcon factoryIcon = new ImageIcon("factory.png");
+                Image factoryImage = factoryIcon.getImage();
+                //School
+                ImageIcon schoolIcon = new ImageIcon("school.png");
+                Image schoolImage = schoolIcon.getImage();
+                
+                //Draw
+                g2d.setComposite(ac);
+                g2d.drawImage(cityServicesImage, 50, 620, 80, 80, null);
+                g2d.drawImage(energyImage, 200, 620, 80, 80, null);
+                g2d.drawImage(factoryImage, 350, 620, 80, 80, null);
+                g2d.drawImage(schoolImage, 500, 620, 80, 80, null);
+                g2d.setColor(Color.WHITE);
+                g2d.drawString("City Services", 50, 710);
+                g2d.drawString("Energy", 220, 710);
+                g2d.drawString("Factory: $7500", 347, 710);
+                g2d.drawString("School: $2000", 496, 710);
+                g2d.setComposite(ac2);
+            }
+            if(cityServiceBool) {
+                 g.fillRect(0, 620, 875, 100);
+                 //Police
+                 ImageIcon policeService = new ImageIcon("police.png");
+                 Image policeServiceImage = policeService.getImage();
+                 //Fire
+                 ImageIcon fireService = new ImageIcon("fire.png");
+                 Image fireServiceImage = fireService.getImage();
+                 //Draw
+                 g2d.setComposite(ac);
+                 g2d.drawImage(policeServiceImage, 50, 620, 80, 80, null);
+                 g2d.drawImage(fireServiceImage, 200, 620, 80, 80, null);
+                 g2d.setColor(Color.WHITE);
+                 g2d.drawString("Police Station: $2500", 39, 710);
+                 g2d.drawString("Fire Station: $2500", 191, 710);
+                 g2d.setComposite(ac2);
+            }
+            if(energyBool) {
+                 g.fillRect(0, 620, 875, 100);
+                 //Windmill
+                 ImageIcon windmillIcon = new ImageIcon("Untitled_Artwork.png");
+                 Image windmillImage = windmillIcon.getImage();
+                 //Solar panel
+                 ImageIcon solarPanelIcon = new ImageIcon("solar pannel.png");
+                 Image solarPanelImage = solarPanelIcon.getImage();
+                 //Nuclear power
+                 ImageIcon nuclearIcon = new ImageIcon("power.png");
+                 Image nuclearImage = nuclearIcon.getImage();
+                 //Draw
+                 g2d.setComposite(ac);
+                 g2d.drawImage(windmillImage, 70, 620, 40, 80, null);
+                 g2d.drawImage(solarPanelImage, 200, 620, 80, 80, null);
+                 g2d.drawImage(nuclearImage, 350, 620, 80, 80, null);
+                 g2d.setColor(Color.WHITE);
+                 g2d.drawString("Windmill: $1000", 57, 710);
+                 g2d.drawString("Solar panel: $750", 188, 710);
+                 g2d.drawString("Nuclear Power Plant: $7500", 322, 710);
+            }
              if(tf == 0 && !infographicDisplay) {
                  //20, 130
                  g.drawImage(buildingImg, (mx-xChangeConst)-(mx-xChangeConst)%25 - 15, (my-yChangeConst)-(my-yChangeConst)%25, widthConst, heightConst, null);
-
              }
              else if (tf == 1 && !infographicDisplay) {
                  int_random = 1000;
@@ -707,11 +1122,8 @@ final public class Main implements MouseInputListener{
              Color lighterBlack = new Color(64, 64, 64, opacity);
              g.setColor(lighterBlack);
              
-             
-            
              //Pop-up for low rise buildings
              if(lowBool) {
-                
                  g.fillRect(0, 620, 875, 100);
                  //Residential
                  ImageIcon lowRes = new ImageIcon("log cabin.png");
@@ -729,25 +1141,27 @@ final public class Main implements MouseInputListener{
                  g2d.drawString("Low Residential: $500", 30, 700);
                  g2d.drawString("Low Commercial: $750", 172, 700);
                  g2d.setComposite(ac2);
-
              }
              //Pop-up window for mid rise buildings
              if(midBool) {
-                 g.fillRect(0, 620, 875, 100);
-                 //Residential
-                 ImageIcon res = new ImageIcon("midapartment.png");
-                 Image resImage = res.getImage();
-                 g2d.setComposite(ac);
-                 g2d.drawImage(resImage, 50, 620, 80, 80, null);
-                 g2d.setComposite(ac2);
-                 //Commercial
-                 ImageIcon comm = new ImageIcon("mall.png");
-                 Image commImage = comm.getImage();
-                 g2d.setComposite(ac);
-                 g2d.setColor(Color.WHITE);
-                 g2d.drawImage(commImage, 210, 620, 100, 100, null);
-                 g2d.setComposite(ac2);
-             }
+                g.fillRect(0, 620, 875, 100);
+                //Residential
+                ImageIcon res = new ImageIcon("midapartment.png");
+                Image resImage = res.getImage();
+                g2d.setComposite(ac);
+                g2d.drawImage(resImage, 50, 620, 80, 80, null);
+                g2d.setColor(Color.WHITE);
+                g2d.drawString("Mid Residential: $750", 32, 710);
+                g2d.setComposite(ac2);
+                //Commercial
+                ImageIcon comm = new ImageIcon("mall.png");
+                Image commImage = comm.getImage();
+                g2d.setComposite(ac);
+                g2d.setColor(Color.WHITE);
+                g2d.drawImage(commImage, 210, 620, 100, 100, null);
+                g2d.drawString("Mid Commercial: $1250", 192, 710);
+                g2d.setComposite(ac2);
+            }
              //Pop-up window for high rise buildings
              if(highBool) {
                  g.fillRect(0, 620, 875, 100);
@@ -770,164 +1184,6 @@ final public class Main implements MouseInputListener{
              
              //Pop-up window for services
              if(servicesBool) {
-                 g.fillRect(0, 620, 875, 100);
-                 //City services
-                 ImageIcon cityServices = new ImageIcon("police.png");
-                 Image cityServicesImage = cityServices.getImage();
-                 if(cityServiceBool) {
-                     g.fillRect(0, 620, 875, 100);
-                 }
-                 //Energy
-                 ImageIcon energy = new ImageIcon("power.png");
-                 Image energyImage = energy.getImage();
-                 if(energyBool) {
-                     g.fillRect(0, 620, 875, 100);
-                 }
-                 //Factory
-                 ImageIcon factory = new ImageIcon("factory.png");
-                 Image factoryImage = factory.getImage();
-                 //School
-                 ImageIcon school = new ImageIcon("school.png");
-                 Image schoolImage = school.getImage();
-                 
-                 //Draw
-                 g2d.setComposite(ac);
-                 g2d.drawImage(cityServicesImage, 50, 620, 80, 80, null);
-                 g2d.drawImage(energyImage, 200, 620, 80, 80, null);
-                 g2d.drawImage(factoryImage, 350, 620, 80, 80, null);
-                 g2d.drawImage(schoolImage, 500, 620, 80, 80, null);
-             }
-             else if(servicesPurchaseBool) {
-                xChangeConst = 7;
-                yChangeConst = 32;
-                widthConst = 50;
-                heightConst = 50;
-                if(policeBool) {
-                    ImageIcon icon = new ImageIcon("police.png");
-                    buildingImg = icon.getImage();
-                    servicesPurchaseBool = false;
-                }
-                else if(fireBool) {
-                    ImageIcon icon = new ImageIcon("fire.png");
-                    buildingImg = icon.getImage();
-                    servicesPurchaseBool = false;
-                }
-                else if(windmill) {
-                    ImageIcon icon = new ImageIcon("Untitled_Artwork.png");
-                    buildingImg = icon.getImage();
-                    servicesPurchaseBool = false;
-                }
-                else if(solarPanel) {
-                    ImageIcon icon = new ImageIcon("solar pannel.png");
-                    buildingImg = icon.getImage();
-                    servicesPurchaseBool = false;
-                }
-                else if(nuclearPower) {
-                    ImageIcon icon = new ImageIcon("power.png");
-                    buildingImg = icon.getImage();
-                    servicesPurchaseBool = false;
-                }
-                else if(factoryBool) {
-                    ImageIcon icon = new ImageIcon("factory.png");
-                    buildingImg = icon.getImage();
-                    servicesPurchaseBool = false;
-                }
-                else if(schoolBool) {
-                    Random rand = new Random();
-                    int upperbound = 2;
-                    int_random = rand.nextInt(upperbound);
-                    ImageIcon icon = new ImageIcon("factory.png");
-                    if(int_random == 0) {
-                        icon = new ImageIcon("school.png");
-                    }
-                    else if(int_random == 1) {
-                        icon = new ImageIcon("school2.png");
-                    }
-                    buildingImg = icon.getImage();
-                    servicesPurchaseBool = false;
-                }
-            }
-            if(tf == 0 && !infographicDisplay) {
-                //20, 130
-                g.drawImage(buildingImg, (mx-xChangeConst)-(mx-xChangeConst)%25 - 15, (my-yChangeConst)-(my-yChangeConst)%25, widthConst, heightConst, null);
-            }
-            else if (tf == 1 && !infographicDisplay) {
-                int_random = 1000;
-                xvalues.add((mx-xChangeConst)-(mx-xChangeConst)%25 - 15/*(int)Math.floor((mx-50)/25)*25*/);
-                yvalues.add((my-yChangeConst)-(my-yChangeConst)%25/*(int)Math.floor((my-50)/25)*25*/);
-                width.add(widthConst);
-                height.add(heightConst);
-                buildingImage.add(buildingImg);
-            }
-            
-            for(int i = 0; i < xvalues.size(); i++) {
-                g.drawImage(buildingImage.get(i), xvalues.get(i), yvalues.get(i), width.get(i), height.get(i), null);
-            }
-            repaint();
-            
-            //Ppo-up window
-            Color lighterBlack = new Color(64, 64, 64, opacity);
-            g.setColor(lighterBlack);
-            
-            //Pop-up for low rise buildings
-            if(lowBool) {
-                g.fillRect(0, 620, 875, 100);
-                //Residential
-                ImageIcon lowRes = new ImageIcon("log cabin.png");
-                Image lowResImage = lowRes.getImage();
-                
-                //Commercial
-                ImageIcon commercial = new ImageIcon("lowshop.png");
-                Image commercialImage = commercial.getImage();
-                
-                //Draw
-                g2d.setComposite(ac);
-                g2d.setColor(Color.WHITE);
-                g2d.drawImage(lowResImage, 50, 620, 80, 80, null);
-                g2d.drawImage(commercialImage, 202, 632, 65, 65, null);
-                g2d.drawString("Low Residential: $500", 30, 700);
-                g2d.drawString("Low Commercial: $750", 172, 700);
-                g2d.setComposite(ac2);
-            }
-            //Pop-up window for mid rise buildings
-            if(midBool) {
-                g.fillRect(0, 620, 875, 100);
-                //Residential
-                ImageIcon res = new ImageIcon("midapartment.png");
-                Image resImage = res.getImage();
-                g2d.setComposite(ac);
-                g2d.drawImage(resImage, 50, 620, 80, 80, null);
-                g2d.setComposite(ac2);
-                //Commercial
-                ImageIcon comm = new ImageIcon("mall.png");
-                Image commImage = comm.getImage();
-                g2d.setComposite(ac);
-                g2d.setColor(Color.WHITE);
-                g2d.drawImage(commImage, 210, 620, 100, 100, null);
-                g2d.setComposite(ac2);
-            }
-            //Pop-up window for high rise buildings
-            if(highBool) {
-                g.fillRect(0, 620, 875, 100);
-                //Residential
-                ImageIcon res = new ImageIcon("tower.png");
-                Image resImage = res.getImage();
-                g2d.setComposite(ac);
-                g2d.drawImage(resImage, 70, 618, 40, 80, null);
-                g2d.setComposite(ac2);
-                //Commercial
-                ImageIcon comm = new ImageIcon("highStore.png");
-                Image commImage = comm.getImage();
-                g2d.setComposite(ac);
-                g2d.setColor(Color.WHITE);
-                g2d.drawImage(commImage, 200, 620, 80, 80, null);
-                g2d.drawString("High Residential: $5000", 30, 710);
-                g2d.drawString("High Commercial: $7500", 172, 710);
-                g2d.setComposite(ac2);
-            }
-            
-            //Pop-up window for services
-            if(servicesBool) {
                 g.fillRect(0, 620, 875, 100);
                 //City services
                 ImageIcon cityServicesIcon = new ImageIcon("police.png");
@@ -948,6 +1204,11 @@ final public class Main implements MouseInputListener{
                 g2d.drawImage(energyImage, 200, 620, 80, 80, null);
                 g2d.drawImage(factoryImage, 350, 620, 80, 80, null);
                 g2d.drawImage(schoolImage, 500, 620, 80, 80, null);
+                g2d.setColor(Color.WHITE);
+                g2d.drawString("City Services", 50, 710);
+                g2d.drawString("Energy", 220, 710);
+                g2d.drawString("Factory: $7500", 347, 710);
+                g2d.drawString("School: $2000", 496, 710);
                 g2d.setComposite(ac2);
             }
             if(cityServiceBool) {
@@ -962,6 +1223,9 @@ final public class Main implements MouseInputListener{
                  g2d.setComposite(ac);
                  g2d.drawImage(policeServiceImage, 50, 620, 80, 80, null);
                  g2d.drawImage(fireServiceImage, 200, 620, 80, 80, null);
+                 g2d.setColor(Color.WHITE);
+                 g2d.drawString("Police Station: $2500", 39, 710);
+                 g2d.drawString("Fire Station: $2500", 191, 710);
                  g2d.setComposite(ac2);
             }
             if(energyBool) {
@@ -980,8 +1244,11 @@ final public class Main implements MouseInputListener{
                  g2d.drawImage(windmillImage, 70, 620, 40, 80, null);
                  g2d.drawImage(solarPanelImage, 200, 620, 80, 80, null);
                  g2d.drawImage(nuclearImage, 350, 620, 80, 80, null);
+                 g2d.setColor(Color.WHITE);
+                 g2d.drawString("Windmill: $1000", 57, 710);
+                 g2d.drawString("Solar panel: $750", 188, 710);
+                 g2d.drawString("Nuclear Power Plant: $7500", 322, 710);
             }
-             
              //Pop-up window for landscape
              if(landscapeBool) {
                  g.fillRect(0, 620, 800, 100);
@@ -1008,6 +1275,63 @@ final public class Main implements MouseInputListener{
              
              ImageIcon resInfographic = new ImageIcon("residential.png");
              Image resInfoImage = resInfographic.getImage();
+            
+/*
+            ImageIcon plantInfographic = new ImageIcon("plant.png");
+             Image plantInfoImage = plantInfographic.getImage();
+
+             ImageIcon indusInfographic = new ImageIcon("industry.png");
+             Image indusInfoImage = indusInfographic.getImage();
+
+             ImageIcon renewInfographic = new ImageIcon("renewablesource.png");
+             Image renewInfoImage = renewInfographic.getImage();
+
+             ImageIcon emmInfographic = new ImageIcon("emmisions.png");
+             Image emmInfoImage = emmInfographic.getImage();g
+             ImageIcon tranInfographic = new ImageIcon("transport.png");
+             Image tranInfoImage = tranInfographic.getImage();
+*/
+             if(infographic == 2 && resBool) {
+                g.drawImage(resInfoImage, 87, 25, 700, 700, null);
+                tf = 0;
+                infographicDisplay = true;
+            }
+
+            /*
+            else if (infographic == 3 && resBool) {
+               g.drawImage(plantInfoImage, 87, 25, 700, 700, null);
+               tf = 1;
+               infographicDisplay = true;
+            }
+            else if (infographic == 4 && resBool) {
+               g.drawImage(indusInfoImage, 87, 25, 700, 700, null);
+               tf = 2;
+               infographicDisplay = true;
+            }
+            else if (infographic == 5 && resBool) {
+               g.drawImage(renewInfoImage, 87, 25, 700, 700, null);
+               tf = 2;
+               infographicDisplay = true;
+            }
+            else if (infographic == 6 && resBool) {
+               g.drawImage(emmInfoImage, 87, 25, 700, 700, null);
+               tf = 2;
+               infographicDisplay = true;
+            }
+            else if (infographic ==  7  && resBool) {
+               g.drawImage(tranInfoImage, 87, 25, 700, 700, null);
+               tf = 2;
+               infographicDisplay = true;
+            }
+            else if(infographic == 8 ) {
+                mx = 1000;
+                my = 1000;
+                infographic++;
+            }
+            else if(infographic == 9 ) {
+                infographicDisplay = false;
+            }
+            */
              
              g.drawImage(lowIconImage,70,703,70,70,null);
              g.drawImage(midIconImage,180,713,60,60,null);
@@ -1018,17 +1342,20 @@ final public class Main implements MouseInputListener{
                  tf = 0;
                  infographicDisplay = true;
              }
+             /*
              else if(infographic == 3) {
-                 mx = 1000;
-                 my = 1000;
-                 infographic++;
+                g.drawImage(renewInfoImage, 87, 25, 700, 700, null);
+                tf = 0;
+                infographicDisplay = true;
+                
              }
-             else if(infographic == 4) {
-                 infographicDisplay = false;
+             else if(infographic == 5) {
+                g.drawImage(indusInfoImage, 87, 25, 700, 700, null);
+                tf = 0;
+                infographicDisplay = true;
              }
              repaint();
-
-             
+             */
         }
     }
     public void mouseMoved(MouseEvent e) {
@@ -1044,7 +1371,7 @@ final public class Main implements MouseInputListener{
         ifRoad=1;
       
       if(tf==0&&ifRoad==1) {
-          if(infographic == 1 || infographic == 2) {
+          if(infographic == 1 || infographic == 2 ) {
               infographic++;
           }
           tf=1;
@@ -1090,7 +1417,6 @@ final public class Main implements MouseInputListener{
         
                    
     }
-
     private void moveIt()
     {
         
@@ -1106,10 +1432,30 @@ final public class Main implements MouseInputListener{
 
                 if (counter%10==0){
                     money+=(1*smallHouse);
+                    Pollution+=(1*smallHouse);
                     System.out.println("yoo");
                
                     }
             }
+            if(Factory>=1){
+
+                if (counter%10==0){
+                    money+=(32*smallHouse);
+                    Pollution+=(8*smallHouse);
+                    System.out.println("yoo");
+               
+                    }
+            }
+            if(SolarPanels>=1){
+
+                if (counter%10==0){
+                    money+=(2*smallHouse);
+                    Pollution+=(-1*smallHouse);
+                    System.out.println("yoo");
+               
+                    }
+            }
+            
             
                 try
                 {
@@ -1131,22 +1477,5 @@ final public class Main implements MouseInputListener{
             /*# Please DO NOT change the code below! */
             
         }
-    }
-
-  
+  }
    
-
-
-  /*
-draw(){
-int + 1
-
-
-
-}
-
-
-
-
-
-  */
